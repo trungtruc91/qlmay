@@ -18,15 +18,11 @@ abstract class ChiTiet
         foreach ($params as $key => $val) {
             $arr_keys = array_keys($val);
             if (in_array('list', $arr_keys)) {
-                if (in_array('dsct', $arr_keys)) {
-                    if ($this->check_output) {
-                        echo "STT   -   ID      -   DSCT   -   SL CTC";
-                        echo "\n";
-                    }
-                    echo ($key + 1) . '    -   ' . $val['id'] . '    -   ' . $val['dsct'] . '    -   ' . $val['sl_ctc'];
-                    echo "\n";
-                }
-                $this->xuat($val);
+                echo 'STT: ' . ($key + 1) . ' => CTP';  echo "\n";
+                echo 'ID: ' . $val['id'];  echo "\n";
+                echo 'Name: ' . $val['name'];  echo "\n";
+                echo 'SL CTC: ' . $val['sl_ctc'];
+                echo "\n";
             } else {
                 if ($this->check_output) {
                     echo "STT   -   ID    -   PRICE   -   WEIGHT";

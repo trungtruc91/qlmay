@@ -45,9 +45,24 @@ class Kho extends ChiTiet
         return $objs;
     }
 
-    public function xuat($params=null)
+    public function xuat($params = null)
     {
+//        foreach ($params['kho'] as $key => $val) {
+//            $arr_keys = array_keys($val);
+//            if (in_array('list', $arr_keys)) {
+//                echo 'STT: ' . ($key + 1) . ' => CTP';  echo "\n";
+//                echo 'ID: ' . $val['id'];  echo "\n";
+//                echo 'Name: ' . $val['name'];  echo "\n";
+//                echo 'SL CTC: ' . $val['sl_ctc'];
+//                echo "\n";
+//            } else {
+//                echo 'STT: ' . ($key + 1) . '=> CTD';  echo "\n";
+//                echo 'ID: ' . $val['id'];  echo "\n";
+//                echo 'Price: ' . $val['price'];  echo "\n";
+//                echo 'Weight: ' . $val['weight'];
+//                echo "\n";
+//            }
+//        }
         parent::xuat($params['kho']);
-
     }
 }
