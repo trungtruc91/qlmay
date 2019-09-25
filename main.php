@@ -1,22 +1,25 @@
 <?php
 require_once 'funcs.php';
-require_once 'chi_tiet_don.php';
-require_once 'chi_tiet_phuc.php';
-require_once 'may.php';
-require_once 'kho.php';
-require_once 'func_file.php';
+require_once 'CTD.php';
+require_once 'CTP.php';
+require_once 'May.php';
+require_once 'Kho.php';
+require_once 'File.php';
+require_once 'KeyPress.php';
 
-$params = json_decode(json_encode(read_file()), true);
+//get data from file
+$params = File::getData('data.txt');
+
+//run
 start();
-//chay ham lay yeu cau tu ban phim
+
 function start()
 {
-    $result = getKeyAndCheck();
-    process_type_input($result);
+    processTypeInput(KeyPress::getKeyAndCheck());
 }
 
 //xac dinh yeu cau nhap tu ban phim
-function process_type_input($result)
+function processTypeInput($result)
 {
     GLOBAL $params;
     switch ($result[0]) {
@@ -24,9 +27,8 @@ function process_type_input($result)
             process_input($result[1]);
             break;
         case 'tk':
-//            getTotal($result[1], $params);
             $type = $result[1];//tinh tong gia hoac tinh tong khoi luong
-            $key = readline("1. Don 2.Phuc 3.May 4.Kho  ");
+            $key = readline("1. Don 2.Phuc 3.May 4.Kho      ");
             $ct = null;
             switch ($key) {
                 case 1:
@@ -99,5 +101,5 @@ function process_input($number)
             $params['kho'][] = $ct->objs;
             break;
     }
-    write_file($params);
+    File::writeFile($params);
 }

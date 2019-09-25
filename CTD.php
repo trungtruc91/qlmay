@@ -1,5 +1,5 @@
 <?php
-require_once 'chi_tiet.php';
+require_once 'CT.php';
 
 class CTDon extends ChiTiet
 {
