@@ -1,5 +1,5 @@
 # huong dan chay project
-php osc.php
+php main.php
 
 # huong phat trien 
 - doc du lieu tu file data.txt
