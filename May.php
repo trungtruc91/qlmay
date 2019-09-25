@@ -53,4 +53,9 @@ class May extends ChiTiet
     {
         parent::xuat($params['may']);
     }
+
+    public function findAll($id, $params = null)
+    {
+        parent::findAll($id, $params['may']);
+    }
 }

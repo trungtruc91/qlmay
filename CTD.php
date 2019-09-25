@@ -33,4 +33,8 @@ class CTDon extends ChiTiet
         parent::xuat($params['don']);
     }
 
+    public function findAll($id, $params = null)
+    {
+        parent::findAll($id, $params['don']);
+    }
 }

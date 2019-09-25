@@ -18,9 +18,12 @@ abstract class ChiTiet
         foreach ($params as $key => $val) {
             $arr_keys = array_keys($val);
             if (in_array('list', $arr_keys)) {
-                echo 'STT: ' . ($key + 1) . ' => CTP';  echo "\n";
-                echo 'ID: ' . $val['id'];  echo "\n";
-                echo 'Name: ' . $val['name'];  echo "\n";
+                echo 'STT: ' . ($key + 1) . ' => CTP';
+                echo "\n";
+                echo 'ID: ' . $val['id'];
+                echo "\n";
+                echo 'Name: ' . $val['name'];
+                echo "\n";
                 echo 'SL CTC: ' . $val['sl_ctc'];
                 echo "\n";
             } else {
@@ -35,9 +38,36 @@ abstract class ChiTiet
         }
     }
 
-    public function timkiem($id, $params)
+    public function findAll($id, $params)
     {
+        $results = [];
+        echo 'ID        -       NAME';
+        foreach ($params as $val) {
+            if ($id == $val['id']) {
+//                $results[]['id'] = [
+//                    'id' => $val['id'],
+//                    'name' => $val['name']
+//                ];
+                echo $val['id'] . '        -       ' . $val['name'];
+            }
+        }
+        return $results;
+    }
 
+    public function find($id, $params, &$results)
+    {
+        foreach ($params as $val) {
+            $arr_keys = array_keys($val);
+//            if (in_array('list', $arr_keys)) {
+//                $this->find($id, $val, $results);
+//            }
+            if ($id == $val['id']) {
+                $results[]['id'] = [
+                    'id' => $val['id'],
+                    'name' => $val['name']
+                ];
+            }
+        }
     }
 
     public function getMS()

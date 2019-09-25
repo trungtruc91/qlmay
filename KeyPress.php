@@ -8,54 +8,45 @@ class  KeyPress
         if (in_array($number, [1, 2, 3])) {
             switch ($number) {
                 case 1:
-                    return getKeyAndCheck('nhap');
+                    nhap:
+                    $result = readline("1. Don 2.Phuc 3.May 4.Kho       | ");
+                    if (in_array($result, [1, 2, 3, 4])) {
+                        return ['nhap', $result];
+                    } else {
+                        self::showError();
+                        goto nhap;
+                    }
                     break;
                 case 2:
-                    return getKeyAndCheck('tk');
-                    break;
+                    tk:
+                    $result = readline("1. Tinh Tong Tien 2.Tinh Tong KL 3.Xuat 4.Tim Kiem      | ");
+                    if (in_array($result, [1, 2, 3, 4])) {
+                        return ['tk', $result];
+                    } else {
+                        self::showError();
+                        goto tk;
+                    }
                 default:
+                    echo "\n-----------BYE------------ \n";
                     die();
                     break;
             }
         } else {
-            echo "Khong hop le. Hay nhap lai.\n";
+            self::showError();
             return getKeyAndCheck();
         }
     }
 
+    //start
     static function getKeyAndCheck($key = 'start')
     {
-        $result = '';
-        switch ($key) {
-            case 'start':
-                $result = readline("1. Nhap 2.Thong Ke 3.Ket Thuc   ");
-                return self::checkKeyStart($result);
-                break;
-            case 'nhap':
-                $result = readline("1. Don 2.Phuc 3.May 4.Kho   ");
-                if (in_array($result, [1, 2, 3, 4])) {
-                    return [$key, $result];
-                } else {
-                    return self::getKeyAndCheck('nhap');
-                }
-                break;
-            case 'tk':
-                $result = readline("1. Tinh Tong Tien 2.Tinh Tong KL 3.Xuat     ");
-                if (in_array($result, [1, 2, 3])) {
-                    return [$key, $result];
-                } else {
-                    return self::getKeyAndCheck('tk');
-                }
-                break;
-            default:
-                self::getKeyAndCheck();
-                break;
-        }
-        return [$key, $result];
+        $result = readline("1. Nhap 2.Thong Ke 3.Ket Thuc       | ");
+        return self::checkKeyStart($result);
     }
 
-    function checkInArr($val, $arr)
+    //show errors
+    static function showError()
     {
-        return in_array($val, $arr);
+        echo "Khong hop le. Hay nhap lai.\n";
     }
 }

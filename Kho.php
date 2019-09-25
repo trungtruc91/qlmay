@@ -65,4 +65,9 @@ class Kho extends ChiTiet
 //        }
         parent::xuat($params['kho']);
     }
+
+    public function findAll($id, $params = null)
+    {
+        parent::findAll($id, $params['kho']);
+    }
 }

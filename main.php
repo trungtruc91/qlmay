@@ -28,7 +28,11 @@ function processTypeInput($result)
             break;
         case 'tk':
             $type = $result[1];//tinh tong gia hoac tinh tong khoi luong
-            $key = readline("1. Don 2.Phuc 3.May 4.Kho      ");
+            if ($type == 4) {
+                $key = readline("1.May 2.Kho      | ");
+            } else {
+                $key = readline("1. Don 2.Phuc 3.May 4.Kho      | ");
+            }
             $ct = null;
             switch ($key) {
                 case 1:
@@ -60,6 +64,10 @@ function processTypeInput($result)
                     break;
                 case 3:
                     $ct->xuat($params);
+                    break;
+                case 4:
+                    $result = readline("Nhap ID      | ");
+                    $ct->findAll($result, $params);
                     break;
             }
             break;
