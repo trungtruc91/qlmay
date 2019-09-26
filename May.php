@@ -11,7 +11,7 @@ class May extends ChiTiet
     public function nhap()
     {
         $this->id = readline("Nhap MS: ");
-        $this->name = readline("Nhap Ten: ");
+        $this->name = readline("Nhap Ten May: ");
         $this->dsct = readline("Nhap DSCT: ");
         $this->sl_ctc = readline("SL CT con: ");
         $obj = [
@@ -23,7 +23,6 @@ class May extends ChiTiet
         ];
         $this->objs = $obj;
     }
-
 
     public function tinhTien($params = null)
     {
@@ -51,7 +50,22 @@ class May extends ChiTiet
 
     public function xuat($params = null)
     {
-        parent::xuat($params['may']);
+        $tbl = new ConsoleTable();
+
+        $tbl->setHeaders(array("STT", "ID", "Name", "SL CTC"));
+
+        foreach ($params['may'] as $key => $val) {
+            $arr_keys = array_keys($val);
+            if (in_array('list', $arr_keys)) {
+                $tbl->addRow(array(
+                    $key + 1,
+                    $val['id'],
+                    $val['name'],
+                    $val['sl_ctc']
+                ));
+            }
+        }
+        echo $tbl->getTable();
     }
 
     public function findAll($id, $params = null)

@@ -30,7 +30,17 @@ class CTDon extends ChiTiet
 
     public function xuat($params = null)
     {
-        parent::xuat($params['don']);
+        $tbl = new ConsoleTable();
+        $tbl->setHeaders(array("STT", "ID", "Price", "Weight"));
+        foreach ($params['don'] as $key => $val) {
+            $tbl->addRow(array(
+                $key + 1,
+                $val['id'],
+                $val['price'],
+                $val['weight']
+            ));
+        }
+        echo $tbl->getTable();
     }
 
     public function findAll($id, $params = null)

@@ -1,4 +1,5 @@
 <?php
+require_once 'ConsoleTable.php';
 
 abstract class ChiTiet
 {
@@ -7,6 +8,7 @@ abstract class ChiTiet
     public $total_money = 0;
     public $total_weight = 0;
     public $check_output = 1;
+    public $check_find = 1;
 
     public function nhap()
     {
@@ -15,59 +17,54 @@ abstract class ChiTiet
 
     public function xuat($params = null)
     {
+        $tbl = new ConsoleTable();
+
+        $tbl->setHeaders(array("STT", "ID", "Price", "Weight"));
+
         foreach ($params as $key => $val) {
             $arr_keys = array_keys($val);
             if (in_array('list', $arr_keys)) {
-                echo 'STT: ' . ($key + 1) . ' => CTP';
-                echo "\n";
-                echo 'ID: ' . $val['id'];
-                echo "\n";
-                echo 'Name: ' . $val['name'];
-                echo "\n";
-                echo 'SL CTC: ' . $val['sl_ctc'];
-                echo "\n";
+                $tbl->addRow(array(
+                    $key + 1,
+                    $val['id'],
+                    $val['name'],
+                    $val['sl_ctc']
+                ));
             } else {
-                if ($this->check_output) {
-                    echo "STT   -   ID    -   PRICE   -   WEIGHT";
-                    echo "\n";
-                }
-                echo ($key + 1) . '    -   ' . $val['id'] . '    -   ' . $val['price'] . '    -   ' . $val['weight'];
-                echo "\n";
+                $tbl->addRow(array(
+                    $key + 1,
+                    $val['id'],
+                    $val['price'],
+                    $val['weight']
+                ));
+//                if ($this->check_output) {
+//                    echo "STT   -   ID    -   PRICE   -   WEIGHT";
+//                    echo "\n";
+//                }
+//                echo ($key + 1) . '    -   ' . $val['id'] . '    -   ' . $val['price'] . '    -   ' . $val['weight'];
+//                echo "\n";
             }
             $this->check_output = 0;
         }
+        echo $tbl->getTable();
     }
 
-    public function findAll($id, $params)
+    public function findAll($val_find, $params)
     {
         $results = [];
-        echo 'ID        -       NAME';
         foreach ($params as $val) {
-            if ($id == $val['id']) {
-//                $results[]['id'] = [
-//                    'id' => $val['id'],
-//                    'name' => $val['name']
-//                ];
-                echo $val['id'] . '        -       ' . $val['name'];
+            if ($val_find == $val['id'] || $val_find == $val['name']) {
+                if ($this->check_find) {
+                    $this->check_find = 0;
+                    echo 'ID        -       NAME' . "\n";
+                }
+                echo $val['id'] . '        -       ' . $val['name'] . "\n";;
             }
+        }
+        if ($this->check_find) {
+            echo "Khong tim thay.\n";
         }
         return $results;
-    }
-
-    public function find($id, $params, &$results)
-    {
-        foreach ($params as $val) {
-            $arr_keys = array_keys($val);
-//            if (in_array('list', $arr_keys)) {
-//                $this->find($id, $val, $results);
-//            }
-            if ($id == $val['id']) {
-                $results[]['id'] = [
-                    'id' => $val['id'],
-                    'name' => $val['name']
-                ];
-            }
-        }
     }
 
     public function getMS()
@@ -94,10 +91,15 @@ abstract class ChiTiet
                 $ct = new CTPhuc();
                 $ct->nhap();
                 break;
+
+            //nhap may
+            case 3:
+                $ct = new May();
+                $ct->nhap();
+                break;
         }
         return $ct->objs;
     }
-
 
     public function sum($params, &$result, $type)
     {

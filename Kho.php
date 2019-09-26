@@ -10,8 +10,8 @@ class Kho extends ChiTiet
     public function nhap()
     {
         $this->id = readline("Nhap MS: ");
-        $this->name = readline("Nhap Ten: ");
-        $this->sl_ctc = readline("SL CT con: ");
+        $this->name = readline("Nhap Ten Kho: ");
+        $this->sl_ctc = readline("SL May: ");
         $obj = [
             'id' => $this->getMS(),
             'name' => $this->name,
@@ -35,35 +35,36 @@ class Kho extends ChiTiet
     {
         $objs = [];
         for ($i = 0; $i < (int)$sl; $i++) {
-            echo "Nhap phan tu thu: " . ($i + 1) . "\n";
-            $number = readline("1. Don 2.Phuc ");
-            if (in_array($number, [1, 2])) {
-                $obj = $this->checkType($number);
-                $objs[] = $obj;
-            }
+//            echo "Nhap phan tu thu: " . ($i + 1) . "\n";
+//            $number = readline("1. Don 2.Phuc ");
+//            if (in_array($number, [1, 2])) {
+//                $obj = $this->checkType($number);
+//                $objs[] = $obj;
+//            }
+            $obj = $this->checkType(3);
+            $objs[] = $obj;
         }
         return $objs;
     }
 
     public function xuat($params = null)
     {
-//        foreach ($params['kho'] as $key => $val) {
-//            $arr_keys = array_keys($val);
-//            if (in_array('list', $arr_keys)) {
-//                echo 'STT: ' . ($key + 1) . ' => CTP';  echo "\n";
-//                echo 'ID: ' . $val['id'];  echo "\n";
-//                echo 'Name: ' . $val['name'];  echo "\n";
-//                echo 'SL CTC: ' . $val['sl_ctc'];
-//                echo "\n";
-//            } else {
-//                echo 'STT: ' . ($key + 1) . '=> CTD';  echo "\n";
-//                echo 'ID: ' . $val['id'];  echo "\n";
-//                echo 'Price: ' . $val['price'];  echo "\n";
-//                echo 'Weight: ' . $val['weight'];
-//                echo "\n";
-//            }
-//        }
-        parent::xuat($params['kho']);
+        $tbl = new ConsoleTable();
+
+        $tbl->setHeaders(array("STT", "ID", "Name", "SL May"));
+
+        foreach ($params['kho'] as $key => $val) {
+            $arr_keys = array_keys($val);
+            if (in_array('list', $arr_keys)) {
+                $tbl->addRow(array(
+                    $key + 1,
+                    $val['id'],
+                    $val['name'],
+                    $val['sl_ctc']
+                ));
+            }
+        }
+        echo $tbl->getTable();
     }
 
     public function findAll($id, $params = null)

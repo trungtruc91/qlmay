@@ -31,21 +31,21 @@ function processTypeInput($result)
             if ($type == 4) {
                 $key = readline("1.May 2.Kho      | ");
             } else {
-                $key = readline("1. Don 2.Phuc 3.May 4.Kho      | ");
+                $key = readline("1.May 2.Kho 3. Don 4.Phuc      | ");
             }
             $ct = null;
             switch ($key) {
                 case 1:
-                    $ct = new CTDon();
-                    break;
-                case 2:
-                    $ct = new CTPhuc();
-                    break;
-                case 3:
                     $ct = new May();
                     break;
-                case 4:
+                case 2:
                     $ct = new Kho();
+                    break;
+                case 3:
+                    $ct = new CTDon();
+                    break;
+                case 4:
+                    $ct = new CTPhuc();
                     break;
                 default:
                     $ct = new CTDon();
@@ -66,7 +66,7 @@ function processTypeInput($result)
                     $ct->xuat($params);
                     break;
                 case 4:
-                    $result = readline("Nhap ID      | ");
+                    $result = readline("Nhap ID hoac Ten      | ");
                     $ct->findAll($result, $params);
                     break;
             }
