@@ -12,6 +12,11 @@ class Kho extends ChiTiet
         $this->id = readline("Nhap MS: ");
         $this->name = readline("Nhap Ten Kho: ");
         $this->sl_ctc = readline("SL May: ");
+        checkSLC:
+        $this->sl_ctc = readline("SL CT con: ");
+        if (!$this->validateNum($this->sl_ctc)) {
+            goto checkSLC;
+        }
         $obj = [
             'id' => $this->getMS(),
             'name' => $this->name,

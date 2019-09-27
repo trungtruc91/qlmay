@@ -114,4 +114,16 @@ abstract class ChiTiet
             }
         }
     }
+
+    public function validateNum($number)
+    {
+//        $number = readline('Nhap so luong chi tiet cua may: ');
+        while ((float)$number < 1 || ((float)$number - (int)$number > 0) || (int)strpos($number, ',') > 0) {
+//            $number = readline('Ban da nhap sai, moi nhap lai: ');
+//            echo '+------------------------------------+';
+//            echo "\n";
+            return false;
+        }
+        return true;
+    }
 }

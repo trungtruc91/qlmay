@@ -14,6 +14,11 @@ class May extends ChiTiet
         $this->name = readline("Nhap Ten May: ");
         $this->dsct = readline("Nhap DSCT: ");
         $this->sl_ctc = readline("SL CT con: ");
+        checkSLC:
+        $this->sl_ctc = readline("SL CT con: ");
+        if (!$this->validateNum($this->sl_ctc)) {
+            goto checkSLC;
+        }
         $obj = [
             'id' => $this->getMS(),
             'name' => $this->name,
